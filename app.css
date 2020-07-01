@@ -33,6 +33,12 @@
 	font-family: 'Indie Flower', cursive;
 }
 
+#restart:hover {
+	color: black;
+	background: pink;
+	transition: .5s;
+}
+
 h1 {
 	text-align: center;
 	font-size: 5em;

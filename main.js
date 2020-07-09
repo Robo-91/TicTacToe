@@ -19,6 +19,7 @@ start.addEventListener('click', () => {
 
 		playerForm.style.display = 'none';
 
+		// Dynamically Create Tic Tac Toe Board
 		const gameBoard = (() => {
 
 			restart.style.display = 'block';
@@ -37,17 +38,19 @@ start.addEventListener('click', () => {
 			}
 
 		})();
-		
+
+	// Create player objects using factory function
 	const Player = (name, marker, isTurn) => {
 		return { name, marker, isTurn };
 	};
 
-
+	// Create IIFE to contains logic to the game
 	const game = (() => {
 
 		const playerOne = Player(playerOneName, 'X');
 		const playerTwo = Player(playerTwoName, 'O');
 
+		// Function randomly assigns which player goes first
 		function assignTurn(){
 			const arr = [true, false];
 			let randomTurn = Math.floor(Math.random() * arr.length);
@@ -66,6 +69,7 @@ start.addEventListener('click', () => {
 
 		boardContainer.addEventListener('click', (e) => {
 
+			// Winning Patterns 
 			const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7]
 				, [2,5,8], [0,4,8], [2,4,6] ];
 
@@ -83,6 +87,7 @@ start.addEventListener('click', () => {
 				message.textContent = `${playerOne.name}'s Turn`
 			}
 
+			// Checks to see if player marks on the board matches any patterns in winningPatterns 
 			for(let i = 0; i < winningPatterns.length; i++){
 
 				let patterns = checkCombo(board, winningPatterns[i]);
@@ -112,6 +117,7 @@ start.addEventListener('click', () => {
 
 	})();
 
+	// function that inserts markers on board with array index specified by winning patterns
 	function checkCombo (arr, index){
 		let combo = [];
 

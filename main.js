@@ -1,3 +1,4 @@
+const heading = document.querySelector('h1');
 const playerForm = document.getElementById('players-form')
 const start = document.getElementById('start');
 const message = document.getElementById('message');
@@ -18,6 +19,7 @@ start.addEventListener('click', () => {
 	if(playerOneName && playerTwoName) {
 
 		playerForm.style.display = 'none';
+		heading.style.display = 'none';
 
 		// Dynamically Create Tic Tac Toe Board
 		const gameBoard = (() => {
@@ -135,6 +137,7 @@ start.addEventListener('click', () => {
 restart.addEventListener('click', () => {
 	board = ['','','','','','','','',''];
 	playerForm.style.display = 'block';
+	heading.style.display = 'block';
 	boardContainer.innerHTML = '';
 	message.style.display = 'none';
 	restart.style.display = 'none';

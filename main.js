@@ -6,6 +6,7 @@ const boardContainer = document.getElementById('board-container');
 const restart = document.getElementById('restart');
 let board = ['','','','','','','','',''];
 
+
 start.addEventListener('click', () => {
 
 	const playerOneName = document.getElementById('player-one').value;
@@ -70,18 +71,27 @@ start.addEventListener('click', () => {
 		}
 
 		boardContainer.addEventListener('click', (e) => {
-
+			let boardList = boardContainer.childNodes;
+			// Set up Computer to make random move
+			function computerChoice () {
+				let randomChoice = Math.floor(Math.random() * 10);
+				randomChoice = randomChoice.toString();
+				return boardList[randomChoice];
+			}
+			
 			// Winning Patterns 
 			const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7]
 				, [2,5,8], [0,4,8], [2,4,6] ];
 
 			if(playerOne.isTurn === true && e.target.textContent === ''){
+				computerChoice();
 				e.target.textContent = playerOne.marker;
 				playerOne.isTurn = false;
 				playerTwo.isTurn = true;
 				board.splice(e.target.id, 1, playerOne.marker);
 				message.textContent = `${playerTwo.name}'s Turn`;
 			} else if(playerTwo.isTurn === true && e.target.textContent === ''){
+				computerChoice();
 				e.target.textContent = playerTwo.marker;
 				playerTwo.isTurn = false;
 				playerOne.isTurn = true;
@@ -134,6 +144,7 @@ start.addEventListener('click', () => {
 
 });
 
+
 restart.addEventListener('click', () => {
 	board = ['','','','','','','','',''];
 	playerForm.style.display = 'block';
@@ -142,4 +153,3 @@ restart.addEventListener('click', () => {
 	message.style.display = 'none';
 	restart.style.display = 'none';
 });
-

@@ -71,27 +71,40 @@ start.addEventListener('click', () => {
 		}
 
 		boardContainer.addEventListener('click', (e) => {
-			let boardList = boardContainer.childNodes;
+			// have function go back and select a different node if gridChoice already has been marked.
+			// set up logic so that 1 player and computer play if selected. push computer's choices
+			// into the winning pattern!
 			// Set up Computer to make random move
-			function computerChoice () {
-				let randomChoice = Math.floor(Math.random() * 10);
-				randomChoice = randomChoice.toString();
-				return boardList[randomChoice];
+			
+			let filterChoices = () => {
+				let boardNodes = [...boardContainer.childNodes];
+				let choicesLeft = boardNodes.filter((item) => {
+					return item.textContent === '';
+				});
+				return choicesLeft;
 			}
+
+			const computerChoice = () => {
+				let randomChoice = Math.floor(Math.random() * filterChoices().length);
+				console.log(filterChoices().length);
+				let gridChoice = document.getElementById(`${filterChoices()[randomChoice].id}`);
+				console.log(filterChoices().length);
+				gridChoice.textContent = 'O';
+				console.log(gridChoice);
+			};
 			
 			// Winning Patterns 
 			const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7]
 				, [2,5,8], [0,4,8], [2,4,6] ];
 
 			if(playerOne.isTurn === true && e.target.textContent === ''){
-				computerChoice();
 				e.target.textContent = playerOne.marker;
+				computerChoice();
 				playerOne.isTurn = false;
 				playerTwo.isTurn = true;
 				board.splice(e.target.id, 1, playerOne.marker);
 				message.textContent = `${playerTwo.name}'s Turn`;
 			} else if(playerTwo.isTurn === true && e.target.textContent === ''){
-				computerChoice();
 				e.target.textContent = playerTwo.marker;
 				playerTwo.isTurn = false;
 				playerOne.isTurn = true;

@@ -34,7 +34,6 @@ start.addEventListener('click', () => {
 				createBoard.id = i;
 				createBoard.setAttribute(`style`, `border: 3px solid pink;
 					text-align: center; 
-					line-height: 150px;
 					font-size: 50px;`);
 				createBoard.textContent = '';
 				boardContainer.appendChild(createBoard);

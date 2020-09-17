@@ -109,10 +109,12 @@ label {
 	}
 
 	#board-container {
-		margin-top: 10em;
+		margin-top: 7em;
 		display: grid;
+		justify-content: center;
 		grid-template-columns: repeat(3, 100px);
 		grid-template-rows: repeat(3, 100px);
+		line-height: 100px;
 	}
 }
 

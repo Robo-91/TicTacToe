@@ -92,9 +92,8 @@ start.addEventListener('click', () => {
 				console.log(gridChoice);
 			};
 			
-			// Winning Patterns 
-			const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7]
-				, [2,5,8], [0,4,8], [2,4,6] ];
+			
+			
 
 			if(playerOne.isTurn === true && e.target.textContent === ''){
 				e.target.textContent = playerOne.marker;
@@ -110,6 +109,9 @@ start.addEventListener('click', () => {
 				board.splice(e.target.id, 1, playerTwo.marker);
 				message.textContent = `${playerOne.name}'s Turn`
 			}
+
+			// Winning Patterns 
+			const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
 
 			// Checks to see if player marks on the board matches any patterns in winningPatterns 
 			for(let i = 0; i < winningPatterns.length; i++){

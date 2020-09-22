@@ -4,7 +4,9 @@ const start = document.getElementById('start');
 const message = document.getElementById('message');
 const boardContainer = document.getElementById('board-container');
 const restart = document.getElementById('restart');
+const overlay = document.getElementById('overlay');
 let board = ['','','','','','','','',''];
+let pcMove;
 
 let numberPlayers = confirm(`Click 'OK' to play against the Computer`);
 
@@ -51,6 +53,7 @@ start.addEventListener('click', () => {
 
 		const playerOne = Player(playerOneName, 'X');
 		const playerTwo = Player(playerTwoName, 'O');
+		const playerPc = Player('Computer', 'O');
 
 		// Function randomly assigns which player goes first
 		function assignTurn(){
@@ -58,18 +61,57 @@ start.addEventListener('click', () => {
 			let randomTurn = Math.floor(Math.random() * arr.length);
 			return arr[randomTurn];
 		}
-		
-	if(numberPlayers === false) {
-		playerOne.isTurn = assignTurn();
 
-		if(playerOne.isTurn === true){
-			playerTwo.isTurn = false;
-			message.textContent = `${playerOne.name}'s Turn`;
-		} else if(playerOne.isTurn === false){
-			playerTwo.isTurn = true;
-			message.textContent = `${playerTwo.name}'s Turn`;
+		// Set up logic for computer to make random choices
+		let filterChoices = () => {
+			let boardNodes = [...boardContainer.childNodes];
+			let choicesLeft = boardNodes.filter((item) => {
+				return item.textContent === '';
+			});
+			return choicesLeft;
 		}
-	}
+
+		function computerChoice() {
+			overlay.style.display = 'block';
+			pcMove = setTimeout(function() {
+				let randomChoice = Math.floor(Math.random() * filterChoices().length);
+				let gridChoice = document.getElementById(`${filterChoices()[randomChoice].id}`);
+				gridChoice.textContent = 'O';
+				board.splice(gridChoice.id, 1, gridChoice.textContent);
+				playerPc.isTurn = false;
+				playerOne.isTurn = true;
+				overlay.style.display = 'none';
+			}, 1000);
+		}  
+			
+		
+		// Sets up initial move for player vs player
+		if(numberPlayers === false) {
+			playerOne.isTurn = assignTurn();
+
+			if(playerOne.isTurn === true){
+				playerTwo.isTurn = false;
+				message.textContent = `${playerOne.name}'s Turn`;
+			} else if(playerOne.isTurn === false){
+				playerTwo.isTurn = true;
+				message.textContent = `${playerTwo.name}'s Turn`;
+			}
+		}
+
+		// Sets up initial move for player vs Pc
+		if(numberPlayers === true) {
+			playerOne.isTurn = assignTurn();
+			console.log(playerOne.isTurn);
+
+			if(playerOne.isTurn === true){
+				playerPc.isTurn = false;
+				message.textContent = `${playerOne.name}'s Turn`;
+			} else if(playerOne.isTurn === false){
+				playerPc.isTurn = true;
+				message.textContent = `${playerPc.name}'s Turn`;
+				computerChoice();
+			}
+		}
 
 		boardContainer.addEventListener('click', (e) => {
 
@@ -96,6 +138,8 @@ start.addEventListener('click', () => {
 
 						if(a === 'X' || a === 'O') {
 							if(b === a && c === a) {
+								overlay.style.display = 'none';
+								clearTimeout(pcMove);
 								message.textContent = `${a} is the Winner!`;
 								playerOne.isTurn = false;
 								playerTwo.isTurn = false;
@@ -115,34 +159,22 @@ start.addEventListener('click', () => {
 			// Player Vs Computer
 
 			if (numberPlayers === true) {
-				playerOne.isTurn = true;
-				let filterChoices = () => {
-					let boardNodes = [...boardContainer.childNodes];
-					let choicesLeft = boardNodes.filter((item) => {
-						return item.textContent === '';
-					});
-					return choicesLeft;
-				}
-	
-				function computerChoice() {
-					let randomChoice = Math.floor(Math.random() * filterChoices().length);
-					let gridChoice = document.getElementById(`${filterChoices()[randomChoice].id}`);
-					gridChoice.textContent = 'O';
-					board.splice(gridChoice.id, 1, gridChoice.textContent);
-				}
-	
+				
 				const playerVsComputer = () => {
 					if (playerOne.isTurn === true && e.target.textContent === '') {
+						overlay.style.display = 'none';
 						e.target.textContent = playerOne.marker;
 						board.splice(e.target.id, 1, playerOne.marker);
 						playerOne.isTurn = false;
-						message.textContent = `${playerOneName}'s Turn`;
+						playerPc.isTurn = true;
+						// message.textContent = `${playerOne.name}'s Turn`;
 						checkWinner();
 					}
-					if (playerOne.isTurn === false) {
-						message.textContent = `Computer's Turn`;
+					if (playerPc.isTurn === true) {
 						computerChoice();
+						// message.textContent = `${playerPc.name}'s Turn`;
 						playerOne.isTurn = true;
+						playerPc.isTurn = false;
 						checkWinner();
 					}
 				}
@@ -179,7 +211,7 @@ start.addEventListener('click', () => {
 });	
 
 restart.addEventListener('click', () => {
-	numberPlayers;
+	clearTimeout(pcMove);
 	board = ['','','','','','','','',''];
 	playerForm.style.display = 'block';
 	heading.style.display = 'block';

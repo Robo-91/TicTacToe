@@ -103,6 +103,7 @@ label {
 		font-size: 1em;
 	}
 	input {
+		width: 22em;
 		font-size: .5em;
 	}
 	#start {

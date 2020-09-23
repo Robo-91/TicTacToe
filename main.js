@@ -46,10 +46,53 @@ start.addEventListener('click', () => {
 	// Create IIFE to contains logic to the game
 	const game = (() => {
 
-		// if((numberPlayers === false) && !playerOneName || !playerTwoName) {
-		// 	alert('Please Enter Your Name!');
-		// 	message.style.display = 'none';
-		// }
+		// Set up logic to determine winner of the game
+		const checkWinner = () => {
+			// Winning Patterns 
+			const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
+
+			// function that inserts markers on board with array index specified by winning patterns
+			function checkCombo (arr, index){
+				let combo = [];
+	
+				index.forEach(function(part) {
+					combo.push(arr[part]);
+				});
+				return combo;
+			}	
+
+			// Checks to see if player marks on the board matches any patterns in winningPatterns 
+			for(let i = 0; i < winningPatterns.length; i++){
+				let patterns = checkCombo(board, winningPatterns[i]);
+					const a = patterns[0];
+					const b = patterns[1];
+					const c = patterns[2];
+
+					if(a === 'X' || a === 'O') {
+						if(b === a && c === a) {
+							overlay.style.display = 'none';
+							clearTimeout(pcMove);
+							message.textContent = `${a} is the Winner!`;
+							playerOne.isTurn = false;
+							playerTwo.isTurn = false;
+							playerPc.isTurn = false;
+							break;
+						}
+					}
+
+					if(!board.includes('')){
+						if(b !== a && c !== a){
+							overlay.style.display = 'none';
+							clearTimeout(pcMove);
+							message.textContent = `It's a Tie!`;
+							playerOne.isTurn = false;
+							playerTwo.isTurn = false;
+							playerPc.isTurn = false;
+							break;
+						}
+					}
+			}
+		}
 
 		const playerOne = Player(playerOneName, 'X');
 		const playerTwo = Player(playerTwoName, 'O');
@@ -81,8 +124,9 @@ start.addEventListener('click', () => {
 				playerPc.isTurn = false;
 				playerOne.isTurn = true;
 				overlay.style.display = 'none';
+				checkWinner();
 			}, 1000);
-		}  
+		} 
 			
 		
 		// Sets up initial move for player vs player
@@ -105,56 +149,15 @@ start.addEventListener('click', () => {
 
 			if(playerOne.isTurn === true){
 				playerPc.isTurn = false;
-				message.textContent = `${playerOne.name}'s Turn`;
 			} else if(playerOne.isTurn === false){
 				playerPc.isTurn = true;
-				message.textContent = `${playerPc.name}'s Turn`;
 				computerChoice();
 			}
 		}
 
 		boardContainer.addEventListener('click', (e) => {
 
-			const checkWinner = () => {
-				// Winning Patterns 
-				const winningPatterns = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
-
-				// function that inserts markers on board with array index specified by winning patterns
-				function checkCombo (arr, index){
-					let combo = [];
-		
-					index.forEach(function(part) {
-						combo.push(arr[part]);
-					});
-					return combo;
-				}	
-
-				// Checks to see if player marks on the board matches any patterns in winningPatterns 
-				for(let i = 0; i < winningPatterns.length; i++){
-					let patterns = checkCombo(board, winningPatterns[i]);
-						const a = patterns[0];
-						const b = patterns[1];
-						const c = patterns[2];
-
-						if(a === 'X' || a === 'O') {
-							if(b === a && c === a) {
-								overlay.style.display = 'none';
-								clearTimeout(pcMove);
-								message.textContent = `${a} is the Winner!`;
-								playerOne.isTurn = false;
-								playerTwo.isTurn = false;
-								break;
-							}
-						}
-
-						if(!board.includes('')){
-							if(b !== a && c !== a){
-								message.textContent = `It's a Tie!`;
-								break;
-							}
-						}
-				}
-			}
+			
 			
 			// Player Vs Computer
 
@@ -167,15 +170,12 @@ start.addEventListener('click', () => {
 						board.splice(e.target.id, 1, playerOne.marker);
 						playerOne.isTurn = false;
 						playerPc.isTurn = true;
-						// message.textContent = `${playerOne.name}'s Turn`;
 						checkWinner();
 					}
 					if (playerPc.isTurn === true) {
 						computerChoice();
-						// message.textContent = `${playerPc.name}'s Turn`;
 						playerOne.isTurn = true;
 						playerPc.isTurn = false;
-						checkWinner();
 					}
 				}
 				

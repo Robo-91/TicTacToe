@@ -1,3 +1,7 @@
+#player-number {
+	display: none;
+}
+
 #board-container{
 	line-height: 150px;
 	margin: auto;

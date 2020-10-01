@@ -1,5 +1,20 @@
 #player-number {
 	display: none;
+	text-align: center;
+	width: 60%;
+	margin: auto;
+}
+
+#two-players {
+	margin: auto;
+}
+
+#one-player {
+	margin: auto
+}
+
+h2 {
+	font-size: 3em;
 }
 
 #board-container{

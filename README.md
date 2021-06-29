@@ -1,4 +1,3 @@
-To view a Demo of this page: https://robo-91.github.io/TicTacToe//
 
 
 
@@ -40,7 +39,9 @@ To-do list:
 
 ## Usage
 
-> Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
+To view a Demo of this page: 
+
+> https://robo-91.github.io/TicTacToe//
 
 ## Contributors
 

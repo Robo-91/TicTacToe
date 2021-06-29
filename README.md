@@ -1,6 +1,3 @@
-
-
-
 # Tic Tac Toe
 
 ## Project Description
@@ -22,6 +19,8 @@ List of features ready and TODOs for future development
 * Forms where player can submit names and choose between 2 player/computer mode.
 * DOM manipulation where the players can click a cell to input their marker.
 * Logic where only one player can choose at a time.
+* Use of factory function pattern to create new objects.
+* Use of IIFE to dynamically create a gameboard using javascript.
 
 To-do list:
 * Finish logic for form that chooses between 2 players/computer.
@@ -30,15 +29,12 @@ To-do list:
 * Make the page responsive with the use of Media Queries.
 
 ## Getting Started
-   
-(include git clone command)
-(include all environment setup steps)
 
-> Be sure to include BOTH Windows and Unix command  
-> Be sure to mention if the commands only work on a specific platform (eg. AWS, GCP)
+Ensure that you have a text editor installed (Visual Studio Code, Sublime text editor).
+If you're using a Windows machine, ensure that you have git bash installed.
 
-- All the `code` required to get started
-- Images of what it should look like
+Using the terminal/command prompt, navigate to the directory that you want to clone your repository in, and use the following command:
+> git clone https://github.com/Robo-91/TicTacToe.git
 
 ## Usage
 

@@ -1,20 +1,20 @@
 To view a Demo of this page: https://robo-91.github.io/TicTacToe//
 
-This webpage is part of The Odin Project Curriculum. It was created with HTML, CSS, and Javascript.
 
-The purpose for creating this webpage was to learn about alternative methods for creating objects in Javascript, aside from using function constructors. The main features used to create this webpage are factory functions and module patterns.
 
-# PROJECT NAME
+# Tic Tac Toe
 
 ## Project Description
 
-Here goes your awesome project description!
+This webpage is my own implementation, and is part of The Odin Project Curriculum.
+
+The purpose for creating this webpage was to learn about alternative methods for creating objects in Javascript, aside from using function constructors. The main features used to create this webpage are factory functions and module patterns.
 
 ## Technologies Used
 
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* HTML
+* CSS
+* Javascript
 
 ## Features
 

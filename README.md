@@ -18,13 +18,16 @@ The purpose for creating this webpage was to learn about alternative methods for
 ## Features
 
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Functionality that allows player v player/player v computer.
+* Forms where player can submit names and choose between 2 player/computer mode.
+* DOM manipulation where the players can click a cell to input their marker.
+* Logic where only one player can choose at a time.
 
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* Finish logic for form that chooses between 2 players/computer.
+* Improve the UI.
+* Fix bug that says game is a tie if entire board is filled (regardless if a player has winning pattern upon filling the board).
+* Make the page responsive with the use of Media Queries.
 
 ## Getting Started
    
@@ -42,10 +45,6 @@ To-do list:
 To view a Demo of this page: 
 
 > https://robo-91.github.io/TicTacToe//
-
-## Contributors
-
-> Here list the people who have contributed to this project. (ignore this section, if its a solo project)
 
 ## License
 
